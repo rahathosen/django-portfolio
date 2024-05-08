@@ -147,7 +147,7 @@
           <div class="flex flex-wrap justify-center gap-x-6 gap-y-4">
 
             {% for category in categories %}
-        <a href=" {{category.name}}">
+            <a href="/category/{{ category.slug }}">
           <span
             class="inline-flex cursor-pointer items-center gap-x-1.5 rounded-full border-[1px] border-teal-100 bg-teal-50 hover:bg-teal-100 px-1.5 py-0.5 text-xs font-medium text-teal-700">
             <svg class="h-1.5 w-1.5 fill-teal-200" viewBox="0 0 6 6" aria-hidden="true">
@@ -178,7 +178,7 @@
           <div class="max-w-xl">
             <div class="mt-8 flex items-center gap-x-4 text-xs">
               <time datetime="{{ post.updated_at|date:"F j, Y" }}" class="text-gray-500">{{ post.updated_at|date:"F j, Y" }}</time>
-              <a href=" {{ post.category }}"
+              <a href="/category/{{ post.category.slug }}"
                 class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{post.category}}</a>
             </div>
             <div class="group relative">

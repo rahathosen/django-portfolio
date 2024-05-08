@@ -11,9 +11,15 @@ from mptt import models as mptt_models
 class Category(models.Model):
     name = models.CharField(max_length=255)
     serial = models.PositiveIntegerField(default=0)
+    slug = models.SlugField(max_length=250, unique=True, blank=True, null=True)
     
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)  # Optional, for automatic slug generation
+        super().save(*args, **kwargs)
 
 
 class Post(models.Model):

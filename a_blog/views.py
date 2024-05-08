@@ -16,7 +16,16 @@ def blog_post_detail(request, slug):
 
 def all_blogs(request):
     posts = Post.objects.all()
-    return render(request, 'blogs.html',{'posts': posts})
+    categories = Category.objects.all()
+    return render(request, 'blogs.html',{'posts': posts, 'categories':categories})
 
 def project_details(request):
     return render(request, 'projects.html')
+
+
+def category_detail(request, slug):
+    category = Category.objects.get(slug=slug)  # Fetch the category by slug
+    posts = Post.objects.filter(category=category, status='published')  # Filter published posts
+
+    context = {'category': category, 'posts': posts}
+    return render(request, 'category/category_detail.html', context)

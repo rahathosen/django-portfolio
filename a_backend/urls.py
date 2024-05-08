@@ -12,6 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', about_view, name='about'),
     path('blog/', all_blogs, name='blog'),
+    path('category/<slug:slug>/', category_detail, name='category_detail'),
     path('projects/', project_details, name='projects'),
     path('blog/<slug:slug>/', blog_post_detail, name='blog_post_detail'),
     path('',home_view)
