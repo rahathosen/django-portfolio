@@ -7,8 +7,8 @@
     display: none !important; 
 }
 :root {
-    --primary: rgb(88, 40, 244);
-    --primary-hover: rgb(69, 29, 200);
+    --primary: rgb(20, 184, 166);
+    --primary-hover: rgb(17, 94, 89);
     --black: #1f2937;
     --font1: 'Lobster', sans-serif;
 }
