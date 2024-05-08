@@ -7,9 +7,11 @@ from a_blog.views import *
 from a_webinfo.views import *
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', about_view, name='about'),
+    path('blog/<slug:slug>/', blog_post_detail, name='blog_post_detail'),
     path('',home_view)
 ]
 
