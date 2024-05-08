@@ -19,11 +19,11 @@
 
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-white">
     <header x-data="{ open: false }" @keydown.window.escape="open = false" class="absolute inset-x-0 top-0 z-50">
         <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div class="flex lg:flex-1">
-                <a href="#" class="-m-1.5 p-1.5">
+                <a href="/" class="-m-1.5 p-1.5">
                     <h3>Labib</h3>
                 </a>
             </div>
@@ -92,27 +92,38 @@
         </div>
     </header>
     <!-- About -->
-    <div class="relative isolate overflow-hidden bg-gradient-to-b from-teal-100/20 pt-14">
-        <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-teal-600/10 ring-1 ring-teal-50 sm:-mr-80 lg:-mr-96"
-            aria-hidden="true"></div>
-        <div class="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
-            <div
-                class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
-                <div class="relative w-full">
-                    {% if post.image %}
-                    <img src="{{ post.image.url }}" alt=""
-                      class="aspect-[3/2] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
-                      {% endif %}
-                      <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
-                  </div>
-                <!-- <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto">About</h1> -->
-                <h1>{{ post.title }}</h1>
-                <p>{{ post.content | safe}}</p>
-            </div>
-            <div class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"></div>
-        </div>
+    <div class="relative isolate overflow-hidden  pt-14">
+        
+       
         <!-- About -->
 
+        <!-- details -->
+        <div class="bg-white ">
+            <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+                {% if post.image %}
+
+                <figure class="mt-16">
+                    <img class="aspect-video rounded-xl bg-gray-50 object-cover" src="{{ post.image.url }}" alt="">
+                    <figcaption class="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
+                      <svg class="mt-0.5 h-5 w-5 flex-none text-gray-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd"></path>
+            </svg>
+                      this is here image source
+                    </figcaption>
+                  </figure>
+
+                  {% endif %}
+              <h1 class="mt-2 text-3xl font-bold align-middle text-center tracking-tight text-gray-900 sm:text-4xl">{{post.title}}</h1>
+              <p class="mt-6 text-xl leading-8">{{post.subtitle}}</p>
+              <div class="mt-10 max-w-2xl">
+        {{post.content | safe}}
+              
+              </div>
+             
+              
+            </div>
+          </div>
+        <!-- details end-->
 
         <footer class="bg-white">
             <div class="mx-auto max-w-7xl overflow-hidden px-6 pt-20 sm:pt-24 lg:px-8">
