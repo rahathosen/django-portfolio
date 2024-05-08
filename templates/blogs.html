@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Blogs</title>
     <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/small/64/000000/fire-heart.png"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,18 +73,54 @@
           </div>
         </div>
       </header>
-      <!-- About -->
+      <!-- Blogs -->
       <div class="relative isolate overflow-hidden bg-gradient-to-b from-teal-100/20 ">
         <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-teal-600/10 ring-1 ring-teal-50 sm:-mr-80 lg:-mr-96" aria-hidden="true"></div>
         <div class="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
           <div class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
+            <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto">Blogs</h1>         
+        </div>
+        <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        
+          {% for post in posts %}
+          <article class="flex flex-col items-start justify-between">
+            <a href="/blog/{{ post.slug }}"> 
+            <div class="relative w-full">
               
-            <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto">About</h1>
-            
+              {% if post.image %}
+              <img src="{{ post.image.url }}" alt=""
+                class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
+                {% endif %}
+                <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
+            </div>
+          </a>
+            <div class="max-w-xl">
+              <div class="mt-8 flex items-center gap-x-4 text-xs">
+                <time datetime="{{ post.updated_at|date:"F j, Y" }}" class="text-gray-500">{{ post.updated_at|date:"F j, Y" }}</time>
+                <a href=" {{ post.category }}"
+                  class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{post.category}}</a>
+              </div>
+              <div class="group relative">
+                <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                  {% if post.image %}
+                  <a href="/blog/{{ post.slug }}">
+                    <span class="absolute inset-0"></span>
+                    {{ post.title }}
+                  </a>
+                  {% endif %}
+                </h3>
+  
+                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{{ post.subtitle }}</p>
+              </div>
+            </div>
+          </article>
+  
+          {% endfor %}
+          <!-- More posts... -->
         </div>
         <div class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"></div>
       </div>
- <!-- About -->
+ <!-- Blogs -->
 
 
  <footer class="bg-white">

@@ -7,8 +7,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome</title>
-  <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/small/64/000000/fire-heart.png" />
+  <title>Portfolio Blog</title>
+  <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/small/64/000000/home.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
@@ -77,11 +77,11 @@
             <div class="space-y-2 py-6">
               <a href="/"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</a>
-              <a href="about"
+              <a href="/about"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Blog</a>
-              <a href="projects"
+              <a href="/projects"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Projects</a>
-              <a href="about"
+              <a href="/about"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
 
             </div>
@@ -142,7 +142,25 @@
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Blog</h2>
         <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p>
+      
+        <div class="flex items-center justify-center bg-white p-4">
+          <div class="flex flex-wrap justify-center gap-x-6 gap-y-4">
+
+            {% for category in categories %}
+        <a href=" {{category.name}}">
+          <span
+            class="inline-flex cursor-pointer items-center gap-x-1.5 rounded-full border-[1px] border-teal-100 bg-teal-50 hover:bg-teal-100 px-1.5 py-0.5 text-xs font-medium text-teal-700">
+            <svg class="h-1.5 w-1.5 fill-teal-200" viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{category.name}}
+          </span>
+        </a>
+        {% endfor %}
+        </div>
+        </div>
       </div>
+      
       <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         
         {% for post in posts %}
