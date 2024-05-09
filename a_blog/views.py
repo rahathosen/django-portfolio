@@ -5,7 +5,7 @@ from a_webinfo.models import WebInfo
 
 # Create your views here.
 def home_view(request):
-    title = "Labib's Portfolio"
+    title = WebInfo.objects.first().name
     webinfo_obj = WebInfo.objects.first()
     posts = Post.objects.all()
     categories = Category.objects.all()
@@ -26,7 +26,6 @@ def project_details(request):
     title = "Project"
     return render(request, 'projects.html',{'title': title,})
 
-
 def category_detail(request, slug):
     category = Category.objects.get(slug=slug)  # Fetch the category by slug
     categories = Category.objects.all()
@@ -35,7 +34,6 @@ def category_detail(request, slug):
 
     context = {'category': category, 'posts': posts, 'categories':categories, 'title':title}
     return render(request, 'category/category_detail.html', context)
-
 
 def search_posts(request):
     query = request.GET.get('query', '')  # Set default empty string for query
@@ -55,3 +53,23 @@ def search_posts(request):
 
     context = {'posts': posts, 'query': query, 'categories': categories,'title':query}
     return render(request, 'search.html', context)
+
+
+
+def header_view(request):
+    webinfo_obj = WebInfo.objects.first() 
+
+    context = {
+        ' webinfo_obj': webinfo_obj,
+    }
+
+    return render(request, 'header.html', context)
+
+def footer_view(request):
+    webinfo_obj = WebInfo.objects.first() 
+
+    context = {
+        ' webinfo_obj': webinfo_obj,
+    }
+
+    return render(request, 'footer.html', context)
