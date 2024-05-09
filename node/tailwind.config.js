@@ -6,11 +6,7 @@ module.exports = {
     '../**/forms.py'
   ],
   theme: {
-    extend: {
-      ringColor: {
-        'custom-black': '#000', // Pure black color
-      },
-    },
+    extend: {},
   },
   plugins: [
     require('@tailwindcss/typography'),
