@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blogs</title>
+  <title>Search</title>
   <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/small/64/000000/fire-heart.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,8 +46,30 @@
 
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="/admin" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
-            aria-hidden="true">→</span></a>
+        <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+          <form id="search-form"action="{% url 'search_posts' %}" method="get">
+            <div class="w-full max-w-lg lg:max-w-xs">
+              <label  for="query" action="{% url 'search_posts' %}" class="sr-only">Search</label>
+              <div class="relative">
+                <input id="search"  name="query" id="query" 
+                  class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                  placeholder="Search post" type="search">
+              </div>
+            </div>
+          </form>
+<!-- for Enter input -->
+          <!-- <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              document.getElementById('search-form').addEventListener('keyup', function (event) {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                  this.submit();
+                }
+              });
+            });
+          </script> -->
+<!-- for Enter -->
+        </div>
       </div>
     </nav>
     <div x-description="Mobile menu, show/hide based on menu open state." class="lg:hidden" x-ref="dialog" x-show="open"
@@ -81,9 +103,23 @@
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
             </div>
             <div class="py-6">
-              <a href="#"
-                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log
-                in</a>
+              <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+                <div class="w-full max-w-lg lg:max-w-xs">
+                  <label for="search" class="sr-only">Search</label>
+                  <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <input id="search" name="search"
+                      class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Search" type="search">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -94,23 +130,20 @@
 
 
   <!-- Blogs -->
-
   <div class="relative isolate overflow-hidden bg-white ">
     <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%]  sm:-mr-80 lg:-mr-96" aria-hidden="true"></div>
     <div class="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
-      {% if posts.0 %}
       <div
         class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
         <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto">
-          Category : <span class="font-semibold font-sans">{{ posts.0.category.name }}</span></h1> 
+          Search</h1>
       </div>
-      {% endif %}
 
-      {% for post in posts %}
-      {% endfor %}
 
       <div class="grid grid-cols-4 md:grid-cols-4 gap-4">
         <div class=" md:col-span-3 col-span-2">
+            {% if posts %}
+  <h2>Search Results for "{{ query }}"</h2>
           <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
             {% for post in posts %}
@@ -118,27 +151,27 @@
               <a href="/blog/{{ post.slug }}">
                 <div class="relative w-full">
 
-                  {% if post.image %}
+                 
                   <img src="{{ post.image.url }}" alt=""
                     class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
-                  {% endif %}
+                 
                   <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
                 </div>
               </a>
               <div class="max-w-xl">
                 <div class="mt-8 flex items-center gap-x-4 text-xs">
                   <time datetime="{{ post.updated_at|date:" F j, Y" }}" class="text-gray-500">{{ post.updated_at|date:"F j, Y" }}</time>
-                  <!-- <a href=" {{ post.category }}"
-                    class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{post.category}}</a> -->
+                  <a href="/category/{{ post.category.slug }}"
+                    class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{post.category}}</a>
                 </div>
                 <div class="group relative">
                   <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    {% if post.image %}
+                  
                     <a href="/blog/{{ post.slug }}">
                       <span class="absolute inset-0"></span>
                       {{ post.title }}
                     </a>
-                    {% endif %}
+                  
                   </h3>
 
                   <p class="mt-5 line-clamp-3 hidden sm:block text-sm leading-6 text-gray-600">{{ post.subtitle }}</p>
@@ -147,7 +180,13 @@
             </article>
             {% endfor %}
           </div>
+
+          {% else %}
+  <h2>No results found for "{{ query }}"</h2>
+{% endif %}
+
         </div>
+        {% if categories %}
         <div class=" md:col-span-1 col-span-2 p-4 ">
           <div class="">
             <fieldset>
@@ -159,20 +198,25 @@
               </legend>
               <div class="px-4 pb-2 pt-4" id="filter-section-2">
                 <div class="space-y-2">
-                  {% for category in categories %}
+                    {% for category in categories %}
                   <div class="flex items-center">
-                      <a href="/category/{{ category.slug }}">
-                      <div for="sizes-0-mobile" class="ml-3 hover:font-bold text-sm text-gray-500"> {{category.name}}</div>
+                    <a href="/category/{{ category.slug }}">
+                      <div for="sizes-0-mobile" class="ml-3 hover:font-bold text-sm text-gray-500"> {{ category.name }}
+                      </div>
                       <div class=""></div>
 
                     </a>
-                    </div>
+                  </div>
+                  
                   {% endfor %}
                 </div>
               </div>
             </fieldset>
           </div>
         </div>
+        {% else %}
+        <p class="text-gray-500">No categories found for your search.</p>
+        {% endif %}
       </div>
 
       <div class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"></div>

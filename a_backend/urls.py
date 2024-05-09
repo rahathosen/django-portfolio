@@ -14,6 +14,7 @@ urlpatterns = [
     path('blog/', all_blogs, name='blog'),
     path('category/<slug:slug>/', category_detail, name='category_detail'),
     path('projects/', project_details, name='projects'),
+    path('search/', search_posts, name='search_posts'),
     path('blog/<slug:slug>/', blog_post_detail, name='blog_post_detail'),
     path('',home_view)
 ]
