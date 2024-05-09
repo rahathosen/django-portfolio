@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> {{ title }} </title>
+  <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/small/64/000000/home.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link rel="stylesheet"
+    href="{% if debug %}{% static 'css/style.css' %}{% else %}{% static 'css/style.min.css' %}{% endif %}">
+  <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+
+</head>
+
+<body class="bg-gray-100">
+  
+  <header x-data="{ open: false }" @keydown.window.escape="open = false" class="absolute inset-x-0 top-0 z-50">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <a href="/" class="-m-1.5 p-1.5">
+          <h3>Labib</h3>
+        </a>
+      </div>
+      <div class="flex lg:hidden ">
+        <div class="-m-2.5 inline-flex items-center cursor-pointer justify-center rounded-md p-2.5 text-gray-700 "
+          @click="open = true">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5">
+            </path>
+          </svg>
+        </div>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <a href="/" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
+        <a href="/blog" class="text-sm font-semibold leading-6 text-gray-900">Blog</a>
+        <a href="/projects" class="text-sm font-semibold leading-6 text-gray-900">Projects</a>
+        <a href="/about" class="text-sm font-semibold leading-6 text-gray-900">About</a>
+
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+          <form id="search-form"action="{% url 'search_posts' %}" method="get">
+            <div class="w-full max-w-lg lg:max-w-xs">
+              <label  for="query" action="{% url 'search_posts' %}" class="sr-only">Search</label>
+              <div class="relative">
+                <input id="search"  name="query" id="query" 
+                  class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                  placeholder="Search post" type="search">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div x-description="Mobile menu, show/hide based on menu open state." class="lg:hidden" x-ref="dialog" x-show="open"
+      aria-modal="true">
+      <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0 z-50"></div>
+      <div
+        class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+        @click.away="open = false">
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <h3>Labib</h3>
+          </a>
+          <div class="-m-2.5 cursor-pointer rounded-md p-2.5 text-gray-700" @click="open = false">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="/"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</a>
+              <a href="/about"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Blog</a>
+              <a href="/projects"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Projects</a>
+              <a href="/about"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
+            </div>
+            <div class="py-6">
+              <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+                <div class="w-full max-w-lg lg:max-w-xs">
+                  <label for="search" class="sr-only">Search</label>
+                  <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                          d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <input id="search" name="search"
+                      class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                      placeholder="Search" type="search">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
