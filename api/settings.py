@@ -21,7 +21,7 @@ SECRET_KEY = 'django-insecure-xps+h9qd*!8y@lu*y5u*ta9up&y62%u$=z#(s1&g%7d2_pvs2t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '*']
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -130,16 +130,12 @@ USE_TZ = True
 
 
 
-# MEDIA_ROOT = BASE_DIR / 'media'
-
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
@@ -150,7 +146,5 @@ CLOUDINARY_STORAGE = {
 }
 
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
