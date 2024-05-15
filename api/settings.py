@@ -27,7 +27,6 @@ INTERNAL_IPS = (
     '127.0.0.1',
     'localhost:8000',
     '127.0.0.1:8000',
-     '.vercel.app',
 )
 
 # Application definition
