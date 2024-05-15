@@ -1,8 +1,7 @@
 echo "BUILD START"
 
 # create a virtual environment named 'venv' if it doesn't already exist
-python3.9 -m venv --without-pip venv
-
+python:3.8-slim -m venv venv
 
 # activate the virtual environment
 source venv/bin/activate
